@@ -16,6 +16,7 @@ int main(int argc, char **argv)
     font.bgColor = TColor(0  ,  0,255);
 
     TPainter paint;
+    paint.drawRectangle(20,20,100,100,TColor(255,0,255));
     paint.drawText(&font,100,100,"This is my text.");
 
     return app.run(paint);

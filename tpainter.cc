@@ -9,11 +9,22 @@ TPainter::TPainter()
 
 void TPainter::paint(TApplication &app)
 {
-    TGraphicsText *item = dynamic_cast<TGraphicsText*>(objects.back());
-    item->draw();
-
-    SDL_Rect textLocation = { 100, 100, /*item->xpos, item->ypos,*/ 0, 0 };
-    SDL_BlitSurface(item->surface, NULL, app.screen, &textLocation);
+    for(auto it = std::begin(objects); it != std::end(objects); ++it)
+    {
+        {
+            TGraphicsText *item = dynamic_cast<TGraphicsText*>(*it);
+            if (item) {
+                item->draw();
+                continue;
+            }
+        }   {
+            TGraphicsRectangle *item = dynamic_cast<TGraphicsRectangle*>(*it);
+            if (item) {
+                item->draw();
+                continue;
+            }
+        }
+    }
 }
 
 void TPainter::drawText(TFont *font, int xpos, int ypos, std::string str)
@@ -23,9 +34,23 @@ void TPainter::drawText(TFont *font, int xpos, int ypos, std::string str)
     text->ypos = ypos;
     text->str  = str;
     text->font = font;
+    text->name = "Label1";
 
     text->font->fgColor = font->fgColor;
     text->font->bgColor = font->bgColor;
 
     objects.push_back(text);
+}
+
+void TPainter::drawRectangle(int xpos, int ypos, int width, int height, TColor color)
+{
+    TGraphicsRectangle *rect = new TGraphicsRectangle;
+    rect->xpos   = xpos;
+    rect->ypos   = ypos;
+    rect->width  = width;
+    rect->height = height;
+    rect->color  = color;
+    rect->name   = "Label1";
+
+    objects.push_back(rect);
 }

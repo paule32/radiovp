@@ -13,6 +13,7 @@
 #include "tfont.h"
 #include "tcolor.h"
 #include "tpainter.h"
+#include "tgraphicsitem.h"
 
 class TPainter;
 class TApplication //: public QMainWindow
@@ -23,9 +24,12 @@ public:
     ~TApplication();
 
     int run(TPainter &paint);
+    bool GetComponentUnderMouse(SDL_Event &event);
 
     SDL_Surface * screen;
     TPainter * paint;
 };
+
+extern SDL_Surface *appScreen;
 
 #endif // TAPPLICATION_H

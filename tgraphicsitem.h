@@ -16,6 +16,16 @@ class TGraphicsItem
 public:
     virtual void draw() = 0;
     SDL_Surface * surface;
+    int zIndex;
+    int itemType;
+
+    int xpos;
+    int ypos;
+
+    int width;
+    int height;
+
+    std::string name;
 };
 
 class TGraphicsText: public TGraphicsItem
@@ -25,9 +35,17 @@ public:
     void draw();
 
     TFont *font;
-    int xpos;
-    int ypos;
+
     std::string str;
+};
+
+class TGraphicsRectangle: public TGraphicsItem
+{
+public:
+    TGraphicsRectangle() { }
+    void draw();
+
+    TColor color;
 };
 
 #endif // TGRAPHICSITEM_H
