@@ -5,22 +5,21 @@
 TPainter::TPainter()
 {
     objects.clear();
-    objects.resize(2048);
 }
 
-void TPainter::begin()
+void TPainter::paint(SDL_Surface *surface)
 {
-    //textSurface = TTF_RenderText_Shaded(font, "This is my text.",
-    //foregroundColor, backgroundColor);
-}
-
-void TPainter::end()
-{
+    TGraphicsItem *item = objects.back();
+    item->draw();
 }
 
 void TPainter::drawText(TFont font, int xpos, int ypos, std::string str)
 {
-    TGraphicsText *text = new
-    TGraphicsText;
-    SDL_Rect textLocation = { xpos, ypos, 0, 0 };
+    TGraphicsText *text = new TGraphicsText;
+    text->xpos = xpos;
+    text->ypos = ypos;
+    text->str  = str;
+    text->font = font;
+
+    objects.push_back(text);
 }
