@@ -6,6 +6,7 @@
 
 void TGraphicsText::draw()
 {
-    this->surface = TTF_RenderText_Shaded(font.font, "sdasASD",
-    fgColor, bgColor);
+    surface = TTF_RenderText_Shaded(font->font, str.c_str(),
+    font->fgColor.sdl_color,
+    font->bgColor.sdl_color);
 }

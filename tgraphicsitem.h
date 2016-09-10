@@ -24,13 +24,10 @@ public:
     TGraphicsText() { }
     void draw();
 
-    TFont font;
+    TFont *font;
     int xpos;
     int ypos;
     std::string str;
-
-    SDL_Color fgColor;
-    SDL_Color bgColor;
 };
 
 #endif // TGRAPHICSITEM_H

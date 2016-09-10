@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     font.bgColor = TColor(0  ,  0,255);
 
     TPainter paint;
-    paint.drawText(font,100,100,"This is my text.");
+    paint.drawText(&font,100,100,"This is my text.");
 
     return app.run(paint);
 }

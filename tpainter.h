@@ -13,7 +13,7 @@ class TPainter
 {
 public:
     TPainter();
-    void drawText(TFont &font, int xpos, int ypos, std::string str);
+    void drawText(TFont *font, int xpos, int ypos, std::string str);
     void paint(TApplication &app);
 protected:
     std::vector<TGraphicsItem*> objects;
