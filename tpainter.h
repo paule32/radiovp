@@ -5,15 +5,16 @@
 #include <vector>
 
 #include "tfont.h"
-#include "tgraphicsitem.h"
+
+class TApplication;
+class TGraphicsItem;
 
 class TPainter
 {
 public:
     TPainter();
-    void begin();
-    void end();
-    void drawText(TFont font, int xpos, int ypos, std::string str);
+    void drawText(TFont &font, int xpos, int ypos, std::string str);
+    void paint(TApplication &app);
 protected:
     std::vector<TGraphicsItem*> objects;
 };
