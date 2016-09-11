@@ -14,10 +14,6 @@ const char* WINDOW_TITLE = "GOOD-Sound.DE Streamer v1.0 (c) paule32";
 
 SDL_Surface *appScreen;
 
-SDL_Surface *surf;
-SDL_mutex *mutex;
-
-
 TApplication::TApplication() //QWidget *parent) : QMainWindow(parent)
 {
     inst = libvlc_new(0, NULL);
