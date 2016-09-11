@@ -30,6 +30,21 @@ public:
     libvlc_instance_t * inst;
     libvlc_media_t *m;
     libvlc_media_player_t *mp;
+
+    libvlc_instance_t * cam1_inst;
+    libvlc_instance_t * cam2_inst;
+    libvlc_instance_t * cam3_inst;
+    libvlc_instance_t * cam4_inst;
+
+    libvlc_media_t *cam1_m;
+    libvlc_media_t *cam2_m;
+    libvlc_media_t *cam3_m;
+    libvlc_media_t *cam4_m;
+
+    libvlc_media_player_t *cam1_mp;
+    libvlc_media_player_t *cam2_mp;
+    libvlc_media_player_t *cam3_mp;
+    libvlc_media_player_t *cam4_mp;
 };
 
 extern SDL_Surface *appScreen;
