@@ -17,8 +17,8 @@
 const int WINDOW_WIDTH = 1024;
 const int WINDOW_HEIGHT = 800;
 
-#define VIDEOWIDTH 320
-#define VIDEOHEIGHT 240
+#define VIDEOWIDTH 630
+#define VIDEOHEIGHT 350
 
 const char* WINDOW_TITLE = "GOOD-Sound.DE Streamer v1.0 (c) paule32";
 
@@ -29,6 +29,7 @@ struct ctx {
     SDL_mutex *mutex;
 };
 
+struct ctx ctx;
 static void *lock(void *data, void **p_pixels)
 {
     struct ctx *ctx = data;
@@ -81,6 +82,11 @@ TApplication::TApplication() //QWidget *parent) : QMainWindow(parent)
     inst = libvlc_new(0, NULL);
     m    = libvlc_media_new_location(inst,"screen://");
     mp   = libvlc_media_player_new_from_media(m);
+    libvlc_media_release(m);
+
+    libvlc_video_set_callbacks(mp, lock, unlock, display, &ctx);
+    libvlc_video_set_format(mp, "RV16", VIDEOWIDTH, VIDEOHEIGHT, VIDEOWIDTH*2);
+
     libvlc_media_player_play(mp);
 }
 
@@ -96,8 +102,6 @@ TApplication::~TApplication()
 
 int TApplication::run(TPainter &paint)
 {
-    struct ctx ctx;
-
     SDL_Event event;
     this->paint = &paint;
 
@@ -110,8 +114,10 @@ int TApplication::run(TPainter &paint)
     ctx.surf  = SDL_CreateRGBSurface(SDL_SWSURFACE, VIDEOWIDTH, VIDEOHEIGHT, 16, 0x001f, 0x07e0, 0xf800, 0);
     ctx.mutex = SDL_CreateMutex();
 
-    rect.x = 10;
-    rect.y = 10;
+    rect.x = 190;
+    rect.y = 160;
+    rect.w = 820;
+    rect.h = 350;
 
     bool mousebutton_left = false;
     int quit = 0;
@@ -143,10 +149,6 @@ int TApplication::run(TPainter &paint)
         }
 
         SDL_FillRect(appScreen, NULL, SDL_MapRGB(appScreen->format,0x47,0x47,0x47));
-
-
-        rect.x = (int)((1. + .5 * sin(0.03 * n)) * (320 - VIDEOWIDTH) / 2);
-        rect.y = (int)((1. + .5 * cos(0.03 * n)) * (200 - VIDEOHEIGHT) / 2);
 
         paint.paint();
 

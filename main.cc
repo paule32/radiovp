@@ -39,10 +39,5 @@ int main(int argc, char **argv)
     paint.drawRectangle(50,90,900,5,TColor(105,250,155));
     paint.drawTicker(&font,100,100,std::string("This is my text."));
 
-
-
-    //libvlc_media_player_play(mp);
-
-    int r = app.run(paint);
-    return r;
+    return app.run(paint);
 }
