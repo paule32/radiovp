@@ -16,6 +16,7 @@ public:
     TPainter();
     void drawImage(int xpos, int ypos, std::string name);
     void drawText(TFont *font, int xpos, int ypos, std::string str);
+    void drawTicker(TFont *font, int xpos, int ypos, std::string name);
     void drawRectangle(Sint16 xpos, Sint16 ypos, Uint16 width, Uint16 height, TColor color);
 
     void paint();

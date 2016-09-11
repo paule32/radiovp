@@ -1,17 +1,30 @@
+#include <stdio.h>
+#include <assert.h>
+
+#include <vlc/vlc.h>
+
 #include "tapplication.h"
 #include "tfont.h"
 #include "tpainter.h"
 #include "tgraphicsitem.h"
 
 const int WINDOW_WIDTH = 1024;
-const int WINDOW_HEIGHT = 700;
+const int WINDOW_HEIGHT = 800;
 const char* WINDOW_TITLE = "GOOD-Sound.DE Streamer v1.0 (c) paule32";
 
 SDL_Surface *appScreen;
 
+SDL_Surface *surf;
+SDL_mutex *mutex;
+
+
 TApplication::TApplication() //QWidget *parent) : QMainWindow(parent)
 {
-    SDL_Init( SDL_INIT_VIDEO );
+    inst = libvlc_new(0, NULL);
+    m    = libvlc_media_new_location(inst,"screen://");
+    mp   = libvlc_media_player_new_from_media(m);
+
+    SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER);
     TTF_Init();
 
     appScreen = SDL_SetVideoMode( WINDOW_WIDTH, WINDOW_HEIGHT, 0,
@@ -22,6 +35,10 @@ TApplication::TApplication() //QWidget *parent) : QMainWindow(parent)
 
 TApplication::~TApplication()
 {
+    libvlc_media_player_stop   (mp);
+    libvlc_media_player_release(mp);
+    libvlc_release(inst);
+
     TTF_Quit();
     SDL_Quit();
 }
@@ -61,6 +78,7 @@ int TApplication::run(TPainter &paint)
         }
 
         SDL_FillRect(appScreen, NULL, SDL_MapRGB(appScreen->format,0x47,0x47,0x47));
+
         paint.paint();
 
         SDL_Flip(appScreen);

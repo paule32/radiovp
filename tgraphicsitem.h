@@ -26,6 +26,7 @@ public:
     Uint16 height;
 
     SDL_Rect rect;
+    TFont *font;
 
     std::string name;
 };
@@ -35,8 +36,6 @@ class TGraphicsText: public TGraphicsItem
 public:
     TGraphicsText() { }
     void draw();
-
-    TFont *font;
 
     std::string str;
 };
@@ -54,6 +53,13 @@ class TGraphicsImage: public TGraphicsItem
 {
 public:
     TGraphicsImage(int x, int y, std::string name) { }
+    void draw();
+};
+
+class TGraphicsTicker: public TGraphicsItem
+{
+public:
+    TGraphicsTicker(int x, int y, std::string name) { }
     void draw();
 };
 

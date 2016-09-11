@@ -1,6 +1,9 @@
 #include "tpainter.h"
 #include "tfont.h"
 #include "tgraphicsitem.h"
+#include "ttimer.h"
+
+TTimer ticker_timer(2000);
 
 TPainter::TPainter()
 {
@@ -27,6 +30,16 @@ void TPainter::paint()
             TGraphicsImage *item = dynamic_cast<TGraphicsImage*>(*it);
             if (item) {
                 item->draw();
+                continue;
+            }
+        }   {
+            TGraphicsTicker *item = dynamic_cast<TGraphicsTicker*>(*it);
+            if (item) {
+                //if (ticker_timer.check())
+                {
+                    SDL_Delay(30);
+                    item->draw();
+                }
                 continue;
             }
         }
@@ -66,4 +79,17 @@ void TPainter::drawImage(int xpos, int ypos, std::string name)
     img->ypos = ypos;
 
     objects.push_back(img);
+}
+
+void TPainter::drawTicker(TFont *font, int xpos, int ypos, std::string name)
+{
+    TGraphicsTicker *ticker = new TGraphicsTicker(xpos,ypos,name);
+    ticker->font = font;
+
+    ticker->xpos = 1024;
+    ticker->ypos = ypos;
+
+    ticker->name = name;
+
+    objects.push_back(ticker);
 }

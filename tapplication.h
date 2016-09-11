@@ -1,14 +1,12 @@
 #ifndef TAPPLICATION_H
 #define TAPPLICATION_H
 
-//#include <QMainWindow>
-//#include <QObject>
-//#include <QWidget>
-
 #include <SDL/SDL_video.h>
 #include <SDL/SDL.h>
 #include <SDL_ttf.h>
 #include <SDL/SDL_opengl.h>
+
+#include <vlc/vlc.h>
 
 #include "tfont.h"
 #include "tcolor.h"
@@ -28,6 +26,10 @@ public:
 
     SDL_Surface * screen;
     TPainter * paint;
+
+    libvlc_instance_t * inst;
+    libvlc_media_t *m;
+    libvlc_media_player_t *mp;
 };
 
 extern SDL_Surface *appScreen;
