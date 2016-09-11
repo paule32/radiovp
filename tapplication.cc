@@ -3,9 +3,9 @@
 #include "tpainter.h"
 #include "tgraphicsitem.h"
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
-const char* WINDOW_TITLE = "SDL Start";
+const int WINDOW_WIDTH = 1024;
+const int WINDOW_HEIGHT = 700;
+const char* WINDOW_TITLE = "GOOD-Sound.DE Streamer v1.0 (c) paule32";
 
 SDL_Surface *appScreen;
 
@@ -60,8 +60,8 @@ int TApplication::run(TPainter &paint)
             }
         }
 
-        SDL_FillRect(appScreen, NULL, SDL_MapRGB(appScreen->format,0,0,0));
-        paint.paint(*this);
+        SDL_FillRect(appScreen, NULL, SDL_MapRGB(appScreen->format,0x47,0x47,0x47));
+        paint.paint();
 
         SDL_Flip(appScreen);
     }

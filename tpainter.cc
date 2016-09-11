@@ -7,7 +7,7 @@ TPainter::TPainter()
     objects.clear();
 }
 
-void TPainter::paint(TApplication &app)
+void TPainter::paint()
 {
     for(auto it = std::begin(objects); it != std::end(objects); ++it)
     {
@@ -19,6 +19,12 @@ void TPainter::paint(TApplication &app)
             }
         }   {
             TGraphicsRectangle *item = dynamic_cast<TGraphicsRectangle*>(*it);
+            if (item) {
+                item->draw();
+                continue;
+            }
+        }   {
+            TGraphicsImage *item = dynamic_cast<TGraphicsImage*>(*it);
             if (item) {
                 item->draw();
                 continue;
@@ -42,15 +48,22 @@ void TPainter::drawText(TFont *font, int xpos, int ypos, std::string str)
     objects.push_back(text);
 }
 
-void TPainter::drawRectangle(int xpos, int ypos, int width, int height, TColor color)
+void TPainter::drawRectangle(Sint16 xpos, Sint16 ypos, Uint16 width, Uint16 height, TColor color)
 {
     TGraphicsRectangle *rect = new TGraphicsRectangle;
-    rect->xpos   = xpos;
-    rect->ypos   = ypos;
-    rect->width  = width;
-    rect->height = height;
-    rect->color  = color;
-    rect->name   = "Label1";
+    rect->rect  = { xpos, ypos, width, height };
+    rect->color = color;
 
     objects.push_back(rect);
+}
+
+void TPainter::drawImage(int xpos, int ypos, std::string name)
+{
+    TGraphicsImage *img = new TGraphicsImage(xpos,ypos,name);
+    img->surface = SDL_LoadBMP(name.c_str());
+
+    img->xpos = xpos;
+    img->ypos = ypos;
+
+    objects.push_back(img);
 }

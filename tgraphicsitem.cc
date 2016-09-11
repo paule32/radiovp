@@ -17,9 +17,15 @@ void TGraphicsText::draw()
 
 void TGraphicsRectangle::draw()
 {
-    SDL_FillRect(appScreen, NULL,
-    SDL_MapRGB(appScreen->format, 255, 0, 0));
+    SDL_FillRect(appScreen, &rect,
+    SDL_MapRGB(appScreen->format,
+        color.sdl_color.r,
+        color.sdl_color.g,
+        color.sdl_color.b));
+}
 
-    SDL_Rect pos = { xpos, ypos, width, height };
-    SDL_BlitSurface(surface, NULL, appScreen, &pos);
+void TGraphicsImage::draw()
+{
+    rect = { xpos, ypos, width, height };
+    SDL_BlitSurface(surface, NULL, appScreen, &rect);
 }

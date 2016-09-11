@@ -16,7 +16,9 @@ int main(int argc, char **argv)
     font.bgColor = TColor(0  ,  0,255);
 
     TPainter paint;
-    paint.drawRectangle(20,20,100,100,TColor(255,0,255));
+
+    paint.drawImage(180,-5,"/dbase/vlc/release/logo.bmp");
+    paint.drawRectangle(50,90,900,5,TColor(105,250,155));
     paint.drawText(&font,100,100,"This is my text.");
 
     return app.run(paint);

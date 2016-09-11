@@ -19,11 +19,13 @@ public:
     int zIndex;
     int itemType;
 
-    int xpos;
-    int ypos;
+    Sint16 xpos;
+    Sint16 ypos;
 
-    int width;
-    int height;
+    Uint16 width;
+    Uint16 height;
+
+    SDL_Rect rect;
 
     std::string name;
 };
@@ -46,6 +48,13 @@ public:
     void draw();
 
     TColor color;
+};
+
+class TGraphicsImage: public TGraphicsItem
+{
+public:
+    TGraphicsImage(int x, int y, std::string name) { }
+    void draw();
 };
 
 #endif // TGRAPHICSITEM_H
